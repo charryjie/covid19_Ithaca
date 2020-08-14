@@ -35,7 +35,6 @@ import {
 } from "reactstrap";
 
 
-const chartColor = "#FFFFFF";
 function hexToRGB(hex, alpha) {
   var r = parseInt(hex.slice(1, 3), 16),
     g = parseInt(hex.slice(3, 5), 16),
