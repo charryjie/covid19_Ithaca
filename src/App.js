@@ -291,7 +291,7 @@ class Dashboard extends React.Component {
 
   getData = () => {
     const Http = new XMLHttpRequest();
-    const url = 'http://localhost:4000/dailydata';
+    const url = 'https://covid19-ithaca.herokuapp.com/dailydata';
     Http.open("GET", url);
 
     Http.onreadystatechange = (e) => {
