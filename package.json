@@ -1,9 +1,5 @@
 {
-  "name": "now-ui-dashboard-react",
   "version": "1.4.0",
-  "main": "dist/index.js",
-  "private": true,
-  "homepage": "https://demos.creative-tim.com/now-ui-dashboard-react/#/",
   "dependencies": {
     "bootstrap": "^4.5.0",
     "chart.js": "^2.9.3",
@@ -28,8 +24,6 @@
     "map-sass": "node-sass src/assets/scss/now-ui-dashboard.scss src/assets/css/now-ui-dashboard.css --source-map true"
   },
   "optionalDependencies": {
-    "@types/googlemaps": "3.39.6",
-    "@types/markerclustererplus": "2.1.33",
     "@types/react": "16.9.36",
     "jquery": "3.5.1",
     "typescript": "3.9.5"
