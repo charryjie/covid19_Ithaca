@@ -98,6 +98,7 @@ var gradientChartOptionsConfigurationWithNumbersAndGrid = {
 };
 
 const thead = ["日期", "总检测", "新增检测", "检测未出结果", "总确诊", "治愈", "住院", "死亡", "今日新增", "现存确诊"];
+// const thead = ["日期", "总确诊", "今日新增", "新增检测"];
 
 function DataCard(props) {
   let color = props.color;
@@ -162,22 +163,62 @@ class PaginateTable extends React.Component{
   }
 
   paginateBackward = () => {
-    if(this.state.startIndex - 10 >= 0) {
+    if(this.state.startIndex - 20 >= 0) {
       this.setState({
-        startIndex: this.state.startIndex - 10
+        startIndex: this.state.startIndex - 20
       })
     }
   }
 
   paginateForward = () => {
-    if(this.state.startIndex + 10 < this.props.data.length) {
+    if(this.state.startIndex + 20 < this.props.data.length) {
       this.setState({
-        startIndex : this.state.startIndex + 10
+        startIndex : this.state.startIndex + 20
       })
     }
   }
 
   render() {
+    let tbody = this.props.data.map((prop, key) => {
+      return (
+        <tr key={key}>
+          <td className="text-left">
+            {prop.date.toString().substring(0, 10)}
+          </td>
+          <td className="text-left">
+            {prop.total_test}
+          </td>
+          <td className="text-left">
+            {
+              (prop.new_test === undefined)
+                ? "无数据"
+                : prop.new_test
+            }
+          </td>
+          <td className="text-left">
+            {prop.pending_result}
+          </td>
+          <td className="text-left">
+            {prop.positive}
+          </td>
+          <td className="text-left">
+            {prop.recovered}
+          </td>
+          <td className="text-left">
+            {prop.hospitalization}
+          </td>
+          <td className="text-left">
+            {prop.death}
+          </td>
+          <td className="text-left">
+            {prop.new_positive}
+          </td>
+          <td className="text-left">
+            {prop.total_active}
+          </td>
+        </tr>
+      );
+    })
     return (
       <Card>
   
@@ -195,47 +236,7 @@ class PaginateTable extends React.Component{
               </tr>
             </thead>
             <tbody>
-              {this.props.data.slice(this.state.startIndex, this.state.startIndex+10).map((prop, key) => {
-                return (
-                  <tr key={key}>
-                    <td className="text-left">
-                      {prop.date.toString().substring(0, 10)}
-                    </td>
-                    <td className="text-left">
-                      {prop.total_test}
-                    </td>
-                    <td className="text-left">
-                      {
-                        (prop.new_test === undefined)
-                          ? "无数据"
-                          : prop.new_test
-                      }
-                    </td>
-                    <td className="text-left">
-                      {prop.pending_result}
-                    </td>
-                    <td className="text-left">
-                      {prop.positive}
-                    </td>
-                    <td className="text-left">
-                      {prop.recovered}
-                    </td>
-                    <td className="text-left">
-                      {prop.hospitalization}
-                    </td>
-                    <td className="text-left">
-                      {prop.death}
-                    </td>
-                    <td className="text-left">
-                      {prop.new_positive}
-                    </td>
-                    <td className="text-left">
-                      {prop.total_active}
-                    </td>
-                  </tr>
-                );
-              })
-            }
+              {tbody.reverse().slice(this.state.startIndex, this.state.startIndex+20)}
             </tbody>
   
           </Table>
@@ -285,6 +286,7 @@ class Dashboard extends React.Component {
         day_active: null
       },
       allData: [],
+      today: null
     }
   }
 
@@ -309,6 +311,7 @@ class Dashboard extends React.Component {
           avg.push(item.seven_avg.toFixed(2));
           active.push(item.total_active)
         });
+        let today = data[len-1].date.toString().replace('T','-').split('-');
         this.setState({
           new: {
             new_positive: data[len-1].new_positive,
@@ -331,6 +334,7 @@ class Dashboard extends React.Component {
             seven_avg: avg,
             day_active: active
           },
+          today: today[0] + '-' + today[1] + '-' + today[2]
         });
         
       }
@@ -507,6 +511,7 @@ class Dashboard extends React.Component {
           
           <Row>
             <Col>
+              
               <Card className="card-chart">
                 <CardBody>
                   <Row>
@@ -536,6 +541,10 @@ class Dashboard extends React.Component {
                       />
                     </Col>
                   </Row>
+
+                  <CardFooter>
+                      <span className="stat">最后更新于{this.state.today}</span>
+                      </CardFooter>
                 </CardBody>
               </Card>
             </Col>
