@@ -21,8 +21,8 @@ import React from "react";
 import { DataCard } from './components/DataCard'
 import { LineChart, BarChart } from './components/Chart'
 import { PaginateTable } from './components/PaginateTable'
-import { daySum, dayIncrease, dayActive} from'./data/ChartData'
-
+import { dataGen} from'./data/ChartData'
+import { chartConfigure } from './components/Chart'
 // reactstrap components
 import {
   Card,
@@ -171,15 +171,18 @@ class Dashboard extends React.Component {
 
           <Row>
             <Col xs={12} md={4}>
-              <LineChart title="总确诊" data={daySum(this.state.dayChange).data} options={daySum(this.state.dayChange).options} />
+              <LineChart title="总确诊" data={ dataGen(this.state.dayChange.date, [{ data: this.state.dayChange.day_sum, label: "确诊人数", color: "#18ce0f"}])} options={ chartConfigure } />
             </Col>
             
             <Col xs={12} md={4}>
-              <BarChart title="每日新增" data={dayIncrease(this.state.dayChange).data} options={dayIncrease(this.state.dayChange).options}></BarChart>
+              <BarChart title="每日新增" data={ dataGen(this.state.dayChange.date, [
+                { data: this.state.dayChange.day_increase, label: "每日新增", color: "#2CA8FF"},
+                { data: this.state.dayChange.seven_avg, label: "七日平均", type: "line", color: "#f96332"}
+                ])} options={chartConfigure}></BarChart>
             </Col>
             
             <Col xs={12} md={4}>
-              <LineChart title="现存确诊" data={dayActive(this.state.dayChange).data} options={dayActive(this.state.dayChange).options} />
+              <LineChart title="现存确诊" data={ dataGen(this.state.dayChange.date, [{ data: this.state.dayChange.day_active, label: "现存确诊", color: "#D8BFD8"}])}options={ chartConfigure } />
             </Col>
             
           </Row>

@@ -21,7 +21,7 @@ export function hexToRGB(hex, alpha) {
     }
 }
 
-export const gradientChartOptionsConfigurationWithNumbersAndGrid = {
+export const chartConfigure = {
     maintainAspectRatio: false,
     legend: {
         display: true,
@@ -91,6 +91,7 @@ export function LineChart(props) {
       </Card>
     )
   }
+
   
 export function BarChart(props) {
     return (
