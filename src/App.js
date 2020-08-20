@@ -134,26 +134,26 @@ class Dashboard extends React.Component {
               <Card className="card-chart">
                 <CardBody>
                   <Row>
-                    <Col className="text-center" style={{borderRight: "1px solid grey", height: "100%"}}>
+                    <Col className="text-center" xs={6} sm={3} style={{borderRight: "1px solid grey", height: "100%"}}>
                       <DataCard
                         title={"累计确诊"} 
                         data={this.state.total.positive}
                       />
                     </Col>
-                    <Col className="text-center" style={{borderRight: "1px solid grey", height: "100%"}}>
+                    <Col className="text-center" xs={6} sm={3} style={{borderRight: "1px solid grey", height: "100%"}}>
                       <DataCard
                         title={"今日确诊"} 
                         data={this.state.new.new_positive}
                         color={this.state.new.new_positive === 0 ? "green": "red"}
                       />
                     </Col>
-                    <Col className="text-center" style={{borderRight: "1px solid grey", height: "100%"}}>
+                    <Col className="text-center" xs={6} sm={3} style={{borderRight: "1px solid grey", height: "100%"}}>
                       <DataCard
                         title={"新增检测"} 
                         data={this.state.new.new_test}
                       />
                     </Col>
-                    <Col className="text-center">
+                    <Col className="text-center" xs={6} sm={3}>
                       <DataCard
                         title={"现存确诊"} 
                         data={this.state.total.total_active}
