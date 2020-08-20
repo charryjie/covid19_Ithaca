@@ -26,14 +26,10 @@ import { daySum, dayIncrease, dayActive} from'./data/ChartData'
 // reactstrap components
 import {
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
-  CardTitle,
   Row,
   Col,
-  Table,
-  Button,
 } from "reactstrap";
 
 class Dashboard extends React.Component {
