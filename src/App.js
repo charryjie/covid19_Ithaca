@@ -141,7 +141,7 @@ class Dashboard extends React.Component {
           <h2 className="text-center" style={{color: "white"}}>康奈尔大学疫情实时动态</h2>
         </div>
         <div ref={this.card} className="content">
-          <Row style={{ position: "-webkit-sticky", position: "sticky", top: 0, zIndex: 999}} >
+          <Row style={{ position: "sticky", top: 0, zIndex: 999}} >
             <Col>
               <Card className="card-chart" style={this.state.cardStyle}>
               <CardBody >
