@@ -58,8 +58,10 @@ class Dashboard extends React.Component {
         day_active: null
       },
       allData: [],
-      today: null
+      today: null,
+      cardStyle: null
     }
+    this.card = React.createRef();
   }
 
   getData = () => {
@@ -117,6 +119,18 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.getData();
+    window.onscroll = () => {
+      let dis = this.card.current.offsetTop;
+      if(window.pageYOffset > dis) {
+        this.setState ({cardStyle: {
+          background: "#D8BFD8"
+        }})
+      } else {
+        this.setState ({cardStyle: {
+          background: "white"
+        }})
+      }
+    }
   }
 
   render() {
@@ -126,52 +140,50 @@ class Dashboard extends React.Component {
         <div className="panel-header" style={{height: "300px", background: "#DC143C"}}>
           <h2 className="text-center" style={{color: "white"}}>康奈尔大学疫情实时动态</h2>
         </div>
-        <div className="content">
-          
-          <Row>
+        <div ref={this.card} className="content">
+          <Row style={{ position: "-webkit-sticky", position: "sticky", top: 0, zIndex: 999}} >
             <Col>
-              
-              <Card className="card-chart">
-                <CardBody>
-                  <Row>
-                    <Col className="text-center" xs={6} sm={3} style={{borderRight: "1px solid grey", height: "100%"}}>
-                      <DataCard
-                        title={"累计确诊"} 
-                        data={this.state.total.positive}
-                      />
-                    </Col>
-                    <Col className="text-center" xs={6} sm={3} style={{borderRight: "1px solid grey", height: "100%"}}>
-                      <DataCard
-                        title={"今日确诊"} 
-                        data={this.state.new.new_positive}
-                        color={this.state.new.new_positive === 0 ? "green": "red"}
-                      />
-                    </Col>
-                    <Col className="text-center" xs={6} sm={3} style={{borderRight: "1px solid grey", height: "100%"}}>
-                      <DataCard
-                        title={"新增检测"} 
-                        data={this.state.new.new_test}
-                      />
-                    </Col>
-                    <Col className="text-center" xs={6} sm={3}>
-                      <DataCard
-                        title={"现存确诊"} 
-                        data={this.state.total.total_active}
-                      />
-                    </Col>
-                  </Row>
+              <Card className="card-chart" style={this.state.cardStyle}>
+              <CardBody >
+                <Row>
+                  <Col className="text-center" xs={3} style={{borderRight: "1px solid grey", height: "80px"}}>
+                    <DataCard
+                      title={"累计确诊"} 
+                      data={this.state.total.positive}
+                    />
+                  </Col>
+                  <Col className="text-center" xs={3} style={{borderRight: "1px solid grey", height: "80px"}}>
+                    <DataCard
+                      title={"今日确诊"} 
+                      data={this.state.new.new_positive}
+                      color={this.state.new.new_positive === 0 ? "green": "red"}
+                    />
+                  </Col>
+                  <Col className="text-center" xs={3} style={{borderRight: "1px solid grey", height: "80px"}}>
+                    <DataCard
+                      title={"新增检测"} 
+                      data={this.state.new.new_test}
+                    />
+                  </Col>
+                  <Col className="text-center" xs={3} style={{height: "80px"}}>
+                    <DataCard
+                      title={"现存确诊"} 
+                      data={this.state.total.total_active}
+                    />
+                  </Col>
+                </Row>
 
-                  <CardFooter>
-                      <span className="stat">最后更新于{this.state.today}</span>
-                      </CardFooter>
-                </CardBody>
-              </Card>
+                <CardFooter>
+                    <span className="stat">最后更新于{this.state.today}</span>
+                    </CardFooter>
+              </CardBody>
+            </Card>
             </Col>
           </Row>
-
+          
           <Row>
             <Col xs={12} md={4}>
-              <LineChart title="总确诊" data={ dataGen(this.state.dayChange.date, [{ data: this.state.dayChange.day_sum, label: "确诊人数", color: "#18ce0f"}])} options={ chartConfigure } />
+              <LineChart title="累计确诊" data={ dataGen(this.state.dayChange.date, [{ data: this.state.dayChange.day_sum, label: "确诊人数", color: "#18ce0f"}])} options={ chartConfigure } />
             </Col>
             
             <Col xs={12} md={4}>
@@ -202,7 +214,7 @@ class Dashboard extends React.Component {
 
 function App() {
   return (
-    <div className="main-panel" style={{width: "100%", height: "unset", float: "unset"}}>
+    <div className="main-panel" style={{width: "100%", height: "unset", float: "unset", overflow: "visible"}}>
       <Dashboard></Dashboard>
   </div>
   )

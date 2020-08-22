@@ -9,7 +9,7 @@ export function DataCard(props) {
 
   return (
     <div>
-      <div style={{paddingBottom: "10px"}}>{props.title}</div>
+      <div>{props.title}</div>
       <h3 className="font-weight-bold" style={{color: color}}>{props.data}</h3>
     </div>
   )

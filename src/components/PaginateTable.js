@@ -39,7 +39,7 @@ export class PaginateTable extends React.Component{
     }
   
     render() {
-      let thead = ["日期", "总检测", "新增检测", "检测未出结果", "总确诊", "治愈", "住院", "死亡", "今日新增", "现存确诊"];
+      let thead = ["日期", "累计检测", "新增检测", "检测未出结果", "累计确诊", "治愈", "住院", "死亡", "今日新增", "现存确诊"];
       let tbody = this.props.data.map((prop, key) => {
         return (
           <tr key={key}>
@@ -81,7 +81,7 @@ export class PaginateTable extends React.Component{
         );
       })
   
-        let thead_sm = ["日期", "总确诊", "今日新增", "新增检测"];
+        let thead_sm = ["日期", "累计确诊", "今日新增", "新增检测"];
         let tbody_sm = []
         for (let key in this.props.data) {
             if (this.state.selectedIndex === key) {
