@@ -59,7 +59,8 @@ class Dashboard extends React.Component {
       },
       allData: [],
       today: null,
-      cardStyle: null
+      cardStyle: null,
+      selectedIdx: -1
     }
     this.card = React.createRef();
   }
@@ -117,67 +118,155 @@ class Dashboard extends React.Component {
     Http.send();
   }
 
+  updateIdx = (idx) => {
+    this.setState ({
+      selectedIdx: idx
+    })
+  }
+
   componentDidMount() {
     this.getData();
     window.onscroll = () => {
       let dis = this.card.current.offsetTop;
-      if(window.pageYOffset > dis) {
-        this.setState ({cardStyle: {
-          background: "#D8BFD8"
-        }})
+      if(window.pageYOffset > dis ) {
+        if (this.state.selectedIdx === -1) {
+          this.setState ({cardStyle: {
+            background: "#D8BFD8"
+            },
+            selectedIdx: this.state.allData.length-1
+          })
+        }
       } else {
-        this.setState ({cardStyle: {
-          background: "white"
-        }})
+        this.setState (
+          {cardStyle: {
+            background: "white"
+          },
+          selectedIdx: -1
+        }
+        )
       }
     }
   }
 
   render() {
-    
     return (
       <>
-        <div className="panel-header" style={{height: "300px", background: "#DC143C"}}>
-          <h2 className="text-center" style={{color: "white"}}>康奈尔大学疫情实时动态</h2>
+        <div className="panel-header" style={{height: "300px", background: "#778899"}}>
+          <h2 className="text-center font-weight-bold" style={{color: "white"}}>康奈尔大学疫情实时动态</h2>
         </div>
         <div ref={this.card} className="content">
           <Row style={{ position: "sticky", top: 0, zIndex: 999}} >
             <Col>
               <Card className="card-chart" style={this.state.cardStyle}>
-              <CardBody >
-                <Row>
-                  <Col className="text-center" xs={3} style={{borderRight: "1px solid grey", height: "80px"}}>
-                    <DataCard
-                      title={"累计确诊"} 
-                      data={this.state.total.positive}
-                    />
-                  </Col>
-                  <Col className="text-center" xs={3} style={{borderRight: "1px solid grey", height: "80px"}}>
-                    <DataCard
-                      title={"今日确诊"} 
-                      data={this.state.new.new_positive}
-                      color={this.state.new.new_positive === 0 ? "green": "red"}
-                    />
-                  </Col>
-                  <Col className="text-center" xs={3} style={{borderRight: "1px solid grey", height: "80px"}}>
-                    <DataCard
-                      title={"新增检测"} 
-                      data={this.state.new.new_test}
-                    />
-                  </Col>
-                  <Col className="text-center" xs={3} style={{height: "80px"}}>
-                    <DataCard
-                      title={"现存确诊"} 
-                      data={this.state.total.total_active}
-                    />
-                  </Col>
-                </Row>
+                {this.state.selectedIdx === -1 ?
+                  <CardBody >
+                    <Row>
+                      <Col className="text-center" xs={3} style={{borderRight: "1px solid grey", height: "80px"}}>
+                        <DataCard
+                          title={"累计确诊"} 
+                          data={this.state.total.positive}
+                          idx={this.state.selectedIdx}
+                        />
+                      </Col>
+                      <Col className="text-center" xs={3} style={{borderRight: "1px solid grey", height: "80px"}}>
+                        <DataCard
+                          title={"今日确诊"} 
+                          data={this.state.new.new_positive}
+                          color={this.state.new.new_positive === 0 ? "green": "red"}
+                          idx={this.state.selectedIdx}
+                        />
+                      </Col>
+                      <Col className="text-center" xs={3} style={{borderRight: "1px solid grey", height: "80px"}}>
+                        <DataCard
+                          title={"新增检测"} 
+                          data={this.state.new.new_test}
+                          idx={this.state.selectedIdx}
+                        />
+                      </Col>
+                      <Col className="text-center" xs={3} style={{height: "80px"}}>
+                        <DataCard
+                          title={"现存确诊"} 
+                          data={this.state.total.total_active}
+                          idx={this.state.selectedIdx}
+                        />
+                      </Col>
+                    </Row>
 
-                <CardFooter>
-                    <span className="stat">最后更新于{this.state.today}</span>
+                    <CardFooter>
+                      <span className="font-weight-bold" style={{color: "#778899"}}>最后更新于{this.state.today}</span>
                     </CardFooter>
-              </CardBody>
-            </Card>
+                  </CardBody> :
+                  <CardBody>  
+                    <Row style={{paddingBottom: "20px"}}>
+                      <Col className="text-center" xs={3} style={{borderRight: "1px solid grey", height: "60px"}}>
+                        <DataCard
+                          title={"日期"} 
+                          data={this.state.allData[this.state.selectedIdx].date.toString().substring(0, 10)}
+                        />
+                      </Col>
+                      <Col className="text-center" xs={2} style={{borderRight: "1px solid grey", height: "60px"}}>
+                        <DataCard
+                          title={"累计确诊"} 
+                          data={this.state.allData[this.state.selectedIdx].positive}
+                        />
+                      </Col>
+                      <Col className="text-center" xs={2} style={{borderRight: "1px solid grey", height: "60px"}}>
+                        <DataCard
+                          title={"当日确诊"} 
+                          data={this.state.allData[this.state.selectedIdx].new_positive}
+                          color={this.state.allData[this.state.selectedIdx].new_positive === 0 ? "green": "red"}
+                        />
+                      </Col>
+                      <Col className="text-center" xs={2} style={{borderRight: "1px solid grey", height: "60px"}}>
+                        <DataCard
+                          title={"累计检测"} 
+                          data={this.state.allData[this.state.selectedIdx].total_test}
+                        />
+                      </Col>
+                      <Col className="text-center" xs={2} style={{height: "60px"}}>
+                        <DataCard
+                          title={"新增检测"} 
+                          data={this.state.allData[this.state.selectedIdx].new_test}
+                        />
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col className="text-center" xs={3} style={{borderRight: "1px solid grey", height: "60px"}}>
+                        <DataCard
+                          title={"检测未出结果"} 
+                          data={this.state.allData[this.state.selectedIdx].pending_result}
+                        />
+                      </Col>
+                      <Col className="text-center" xs={2} style={{borderRight: "1px solid grey", height: "60px"}}>
+                        <DataCard
+                          title={"治愈"} 
+                          data={this.state.allData[this.state.selectedIdx].recovered}
+                        />
+                      </Col>
+                      <Col className="text-center" xs={2} style={{borderRight: "1px solid grey", height: "60px"}}>
+                        <DataCard
+                          title={"住院"} 
+                          data={this.state.allData[this.state.selectedIdx].hospitalization}
+                        />
+                      </Col>
+                      <Col className="text-center" xs={2} style={{borderRight: "1px solid grey", height: "60px"}}>
+                        <DataCard
+                          title={"死亡"} 
+                          data={this.state.allData[this.state.selectedIdx].death}
+                        />
+                      </Col>
+                      <Col className="text-center" xs={2} style={{height: "60px"}}>
+                        <DataCard
+                          title={"现存确诊"} 
+                          data={this.state.allData[this.state.selectedIdx].total_active}
+                        />
+                      </Col>
+                    </Row>
+                     
+                  </CardBody>
+                }
+              </Card>
             </Col>
           </Row>
           
@@ -201,7 +290,7 @@ class Dashboard extends React.Component {
           
           <Row>
             <Col xs={12}>                
-              <PaginateTable title="详细数据" data={this.state.allData}></PaginateTable>
+              <PaginateTable title="详细数据" updateIdx={this.updateIdx} data={this.state.allData}></PaginateTable>
             </Col>
             
           </Row>

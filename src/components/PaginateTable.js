@@ -7,8 +7,6 @@ import {
     CardBody,
     CardFooter,
     CardTitle,
-    Row,
-    Col,
     Table,
     Button,
 } from "reactstrap";
@@ -18,7 +16,7 @@ export class PaginateTable extends React.Component{
       super(props)
       this.state = {
         startIndex: 0,
-        selectedIndex: -1
+        // selectedIndex: -1
       }
     }
   
@@ -80,28 +78,12 @@ export class PaginateTable extends React.Component{
           </tr>
         );
       })
-  
+
         let thead_sm = ["日期", "累计确诊", "今日新增", "新增检测"];
         let tbody_sm = []
         for (let key in this.props.data) {
-            if (this.state.selectedIndex === key) {
-                tbody_sm.push(
-                    <tr>
-                        <td colspan="4">
-                            <Row>
-                                <Col>总检测: {this.props.data[this.state.selectedIndex].total_test}</Col>
-                                <Col>检测未出结果: {this.props.data[this.state.selectedIndex].pending_result}</Col>
-                                <Col>治愈: {this.props.data[this.state.selectedIndex].recovered}</Col>
-                                <Col>住院: {this.props.data[this.state.selectedIndex].hospitalization}</Col>
-                                <Col>死亡: {this.props.data[this.state.selectedIndex].death}</Col>
-                                <Col>现存确诊: {this.props.data[this.state.selectedIndex].total_active}</Col>
-                            </Row>
-                        </td>
-                    </tr>
-                )
-            }
             tbody_sm.push(
-                <tr key={key} onClick={() => this.setState({selectedIndex: key})}>
+                <tr key={key} onClick={() => this.props.updateIdx(key)}>
                     <td className="text-left">
                     {this.props.data[key].date.toString().substring(0, 10)}
                     </td>
