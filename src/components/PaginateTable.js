@@ -85,7 +85,7 @@ export class PaginateTable extends React.Component{
             tbody_sm.push(
                 <tr key={key} onClick={() => this.props.updateIdx(key)}>
                     <td className="text-left">
-                    {this.props.data[key].date.toString().substring(0, 10)}
+                    {this.props.data[key].date.toString().substring(5, 10)}
                     </td>
                     <td className="text-left">
                     {this.props.data[key].positive}

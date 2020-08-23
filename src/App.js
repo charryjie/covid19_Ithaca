@@ -161,14 +161,14 @@ class Dashboard extends React.Component {
                 {this.state.selectedIdx === -1 ?
                   <CardBody >
                     <Row>
-                      <Col className="text-center" xs={6} sm={3} style={{borderRight: "1px solid grey", height: "80px"}}>
+                      <Col className="text-center" xs={3} style={{borderRight: "1px solid grey", height: "80px"}}>
                         <DataCard
-                          title={"累计确诊"} 
+                          title={"总确诊"} 
                           data={this.state.total.positive}
                           idx={this.state.selectedIdx}
                         />
                       </Col>
-                      <Col className="text-center" xs={6} sm={3} style={{borderRight: "1px solid grey", height: "80px"}}>
+                      <Col className="text-center" xs={3} style={{borderRight: "1px solid grey", height: "80px"}}>
                         <DataCard
                           title={"今日确诊"} 
                           data={this.state.new.new_positive}
@@ -176,14 +176,14 @@ class Dashboard extends React.Component {
                           idx={this.state.selectedIdx}
                         />
                       </Col>
-                      <Col className="text-center" xs={6} sm={3} style={{borderRight: "1px solid grey", height: "80px"}}>
+                      <Col className="text-center" xs={3} style={{borderRight: "1px solid grey", height: "80px"}}>
                         <DataCard
                           title={"新增检测"} 
                           data={this.state.new.new_test}
                           idx={this.state.selectedIdx}
                         />
                       </Col>
-                      <Col className="text-center" xs={6} sm={3} style={{height: "80px"}}>
+                      <Col className="text-center" xs={3} style={{height: "80px"}}>
                         <DataCard
                           title={"现存确诊"} 
                           data={this.state.total.total_active}
@@ -193,70 +193,67 @@ class Dashboard extends React.Component {
                     </Row>
 
                     <CardFooter>
-                      <span className="font-weight-bold" style={{color: "#778899"}}>最后更新于{this.state.today}</span>
+                      <span className="font-weight-bold" style={{color: "#778899"}}>更新于{this.state.today}</span>
                     </CardFooter>
                   </CardBody> :
                   <CardBody>  
                     <Row style={{paddingBottom: "20px"}}>
-                      <Col className="text-center" xs={3} style={{borderRight: "1px solid grey", height: "60px"}}>
+                      <Col className="text-center" xs={6} style={{borderRight: "1px solid grey", height: "60px"}}>
                         <DataCard
                           title={"日期"} 
                           data={this.state.allData[this.state.selectedIdx].date.toString().substring(0, 10)}
                         />
                       </Col>
-                      <Col className="text-center" xs={2} style={{borderRight: "1px solid grey", height: "60px"}}>
+                      <Col className="text-center" xs={6} style={{borderRight: "1px solid grey", height: "60px"}}>
                         <DataCard
                           title={"累计确诊"} 
                           data={this.state.allData[this.state.selectedIdx].positive}
                         />
                       </Col>
-                      <Col className="text-center" xs={2} style={{borderRight: "1px solid grey", height: "60px"}}>
+                      <Col className="text-center" xs={6} style={{borderRight: "1px solid grey", height: "60px"}}>
                         <DataCard
                           title={"当日确诊"} 
                           data={this.state.allData[this.state.selectedIdx].new_positive}
                           color={this.state.allData[this.state.selectedIdx].new_positive === 0 ? "green": "red"}
                         />
                       </Col>
-                      <Col className="text-center" xs={2} style={{borderRight: "1px solid grey", height: "60px"}}>
+                      <Col className="text-center" xs={6} style={{borderRight: "1px solid grey", height: "60px"}}>
                         <DataCard
                           title={"累计检测"} 
                           data={this.state.allData[this.state.selectedIdx].total_test}
                         />
                       </Col>
-                      <Col className="text-center" xs={2} style={{height: "60px"}}>
+                      <Col className="text-center" xs={6} style={{height: "60px"}}>
                         <DataCard
                           title={"新增检测"} 
                           data={this.state.allData[this.state.selectedIdx].new_test}
                         />
                       </Col>
-                    </Row>
-
-                    <Row>
-                      <Col className="text-center" xs={3} style={{borderRight: "1px solid grey", height: "60px"}}>
+                      <Col className="text-center" xs={6} style={{borderRight: "1px solid grey", height: "60px"}}>
                         <DataCard
                           title={"检测未出结果"} 
                           data={this.state.allData[this.state.selectedIdx].pending_result}
                         />
                       </Col>
-                      <Col className="text-center" xs={2} style={{borderRight: "1px solid grey", height: "60px"}}>
+                      <Col className="text-center" xs={6} style={{borderRight: "1px solid grey", height: "60px"}}>
                         <DataCard
                           title={"治愈"} 
                           data={this.state.allData[this.state.selectedIdx].recovered}
                         />
                       </Col>
-                      <Col className="text-center" xs={2} style={{borderRight: "1px solid grey", height: "60px"}}>
+                      <Col className="text-center" xs={6} style={{borderRight: "1px solid grey", height: "60px"}}>
                         <DataCard
                           title={"住院"} 
                           data={this.state.allData[this.state.selectedIdx].hospitalization}
                         />
                       </Col>
-                      <Col className="text-center" xs={2} style={{borderRight: "1px solid grey", height: "60px"}}>
+                      <Col className="text-center" xs={6} style={{borderRight: "1px solid grey", height: "60px"}}>
                         <DataCard
                           title={"死亡"} 
                           data={this.state.allData[this.state.selectedIdx].death}
                         />
                       </Col>
-                      <Col className="text-center" xs={2} style={{height: "60px"}}>
+                      <Col className="text-center" xs={6} style={{height: "60px"}}>
                         <DataCard
                           title={"现存确诊"} 
                           data={this.state.allData[this.state.selectedIdx].total_active}
