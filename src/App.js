@@ -50,8 +50,8 @@ function Dashboard() {
 
   let getData = () => {
     const Http = new XMLHttpRequest();
-    // const url = 'https://covid19-ithaca.herokuapp.com/dailydata';
-    const url = 'http://localhost:4999/dailydata'
+    const url = 'https://covid19-ithaca.herokuapp.com/dailydata';
+    // const url = 'http://localhost:4999/dailydata'
     Http.open("GET", url);
 
     Http.onreadystatechange = (e) => {
