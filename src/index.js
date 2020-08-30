@@ -24,7 +24,17 @@ import "assets/css/demo.css";
 
 import App from "App";
 
+import updateReducer from './reducer';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+
 ReactDOM.render(
-  <App />,
+  <Provider store={configureStore({
+    reducer: {
+      update: updateReducer,
+    }
+  })}>
+    <App />
+  </Provider>,
   document.getElementById("root")
 );
