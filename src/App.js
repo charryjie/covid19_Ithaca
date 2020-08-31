@@ -60,7 +60,7 @@ function Dashboard() {
     let dis = card.current.offsetTop;
     if(window.pageYOffset > dis ) {
       if (currentIdx === -1) {
-        dispatch(changeColor("#D8BFD8"))
+        dispatch(changeColor("white"))
         dispatch(updateByKey(allData.length-1))
       }
     } else {

@@ -16,7 +16,8 @@ export function DailyData() {
 
 
     return (
-        <Row style={{ position: "sticky", top: 0, zIndex: 999}} >
+        // <Row style={{ position: "", top: 0, zIndex: 999}} >
+        <Row>
             <Col xs={12} md={6}>
                 <Card className="card-chart" style={cardStyle}>
                     <CardBody>
