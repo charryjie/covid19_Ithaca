@@ -73,7 +73,7 @@ export function DailyData() {
                                 <DataCard
                                     title={"死亡"} 
                                     data={total.death}
-                                    secData={"阳性率: " + total.death_ratio + "%"}
+                                    secData={"死亡率: " + total.death_ratio + "%"}
                                 />
                             </Col>
                         </Row>
