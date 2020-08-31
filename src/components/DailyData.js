@@ -25,22 +25,24 @@ export function DailyData() {
                                 <DataCard
                                     title={"总确诊"} 
                                     data={total.positive}
-                                    secData={'+ ' + newDay.new_positive}
-                                    color={newDay.new_positive === 0 ? "green": "red"}
+                                    secData={(newDay.new_positive >= 0 ? '+' : '') + newDay.new_positive}
+                                    color={newDay.new_positive <= 0 ? "green": "red"}
                                 />
                             </Col>
                             <Col className="text-center" xs={4} style={{borderRight: "1px solid grey"}}>
                                 <DataCard
                                     title={"现存"} 
                                     data={total.total_active}
-                                    secData={'+ ' + newDay.new_totalactive}
+                                    secData={(newDay.new_totalactive >= 0 ? '+' : '') + newDay.new_totalactive}
+                                    color={newDay.new_totalactive <= 0 ? "green": "red"}
                                 />
                             </Col>
                             <Col className="text-center" xs={4} >
                                 <DataCard
                                     title={"住院"} 
                                     data={total.hospitalization}
-                                    secData={'+ ' + newDay.new_hospitalization}
+                                    secData={(newDay.new_hospitalization >= 0 ? '+' : '') + newDay.new_hospitalization}
+                                    color={newDay.new_hospitalization <= 0 ? "green": "red"}
                                 />
                             </Col>
                         </Row>
