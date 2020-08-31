@@ -31,7 +31,7 @@ import { configureStore } from '@reduxjs/toolkit';
 ReactDOM.render(
   <Provider store={configureStore({
     reducer: {
-      update: updateReducer,
+      covid19: updateReducer,
     }
   })}>
     <App />

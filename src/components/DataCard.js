@@ -9,9 +9,10 @@ export function DataCard(props) {
 
   return (
     <div>
-      <div style={{paddingBottom: "20px"}}>{props.title}</div>
-      {props.idx === -1 ? <h5 className="font-weight-bold" style={{color: color}}>{props.data}</h5>
-      : <div className="font-weight-bold" style={{color: color}}>{props.data}</div>}
+      <div style={{paddingBottom: "10px"}}>{props.title}</div>
+      <h5 className="font-weight-bold" style={{fontSize: "1em"}}>{props.data}</h5>
+      <h6 className="font-weight-bold" style={{color: color}}>{props.secData}</h6>
     </div>
   )
 }
+

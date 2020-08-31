@@ -1,4 +1,4 @@
-import { hexToRGB } from '../components/Chart'
+import { hexToRGB } from '../components/ChartBasic'
 
 export function dataGen(labels, data) {
     return (canvas) => {

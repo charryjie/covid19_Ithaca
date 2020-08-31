@@ -11,13 +11,13 @@ import {
     Button,
 } from "reactstrap";
 
-import { useDispatch } from 'react-redux';
-import { updateByKey } from '../reducer';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectAllData, updateByKey } from '../reducer';
 
 export function PaginateTable(props) {
 
     const [startIdx, setStartIdx] = useState(0);
-  
+    const data = useSelector(selectAllData);
     const dispatch = useDispatch();
 
     let paginateBackward = () => {
@@ -27,13 +27,13 @@ export function PaginateTable(props) {
     }
   
     let paginateForward = () => {
-      if(startIdx + 20 < props.data.length) {
+      if(startIdx + 20 < data.length) {
         setStartIdx(startIdx+20);
       }
     }
   
     let thead = ["日期", "累计检测", "新增检测", "检测未出结果", "累计确诊", "治愈", "住院", "死亡", "今日新增", "现存确诊"];
-    let tbody = props.data.map((prop, key) => {
+    let tbody = data.map((prop, key) => {
         return (
           <tr key={key}>
             <td className="text-left">
@@ -76,23 +76,23 @@ export function PaginateTable(props) {
 
     let thead_sm = ["日期", "累计确诊", "今日新增", "新增检测"];
     let tbody_sm = []
-    for (let key in props.data) {
+    for (let key in data) {
         tbody_sm.push(
             <tr key={key} onClick={() => dispatch(updateByKey(key))}>
                 <td className="text-left">
-                {props.data[key].date.toString().substring(5, 10)}
+                {data[key].date.toString().substring(5, 10)}
                 </td>
                 <td className="text-left">
-                {props.data[key].positive}
+                {data[key].positive}
                 </td>
                 <td className="text-left">
-                {props.data[key].new_positive}
+                {data[key].new_positive}
                 </td>
                 <td className="text-left">
                 {
-                    (props.data[key].new_test === undefined)
+                    (data[key].new_test === undefined)
                     ? "无数据"
-                    : props.data[key].new_test
+                    : data[key].new_test
                 }
                 </td>
             </tr>
