@@ -26,7 +26,7 @@ export function Chart() {
           </Col>
 
           <Col xs={12} md={4}>
-            {chartArr[selectedCard === 0 ? 0 : 0]}
+            {chartArr[selectedCard === 0 ? 3 : 0]}
           </Col>
           
           <Col xs={12} md={4}>
@@ -37,7 +37,7 @@ export function Chart() {
           </Col>
           
           <Col xs={12} md={4}>
-            {chartArr[selectedCard === 1 ? 1 : 1]}
+            {chartArr[selectedCard === 1 ? 4 : 1]}
           </Col>
           
         </Row>
