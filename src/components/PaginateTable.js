@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Trans, useTranslation } from "react-i18next";
 import {
     Card,
     CardHeader,
@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 import { selectAllData } from '../reducer';
 
 export function PaginateTable(props) {
-
+    const { t } = useTranslation();
     const [startIdx, setStartIdx] = useState(0);
     const data = useSelector(selectAllData);
 
@@ -30,7 +30,7 @@ export function PaginateTable(props) {
       }
     }
   
-    let thead = ["日期", "总检测", "新增检测", "待定结果", "总确诊", "治愈", "住院", "死亡", "当日新增", "现存确诊"];
+    let thead = [t("Date"), t("Total Tested"), t("New Tested"), t("Pending Result"), t("Positive"), t("Recovered"), t("Hospitalization"), t("Death"), t("New Positive"), t("Total Active")];
     let tbody = data.map((prop, key) => {
         return (
           <tr key={key}>
@@ -76,7 +76,7 @@ export function PaginateTable(props) {
         <Card>
 
             <CardHeader>
-                <CardTitle tag="h4">{props.title}</CardTitle>
+                <CardTitle tag="h4"><Trans>{props.title}</Trans></CardTitle>
             </CardHeader>
 
             <CardBody>
@@ -97,11 +97,11 @@ export function PaginateTable(props) {
             <CardFooter className="text-center">
         
                 <Button onClick={paginateBackward} style={{marginRight: "30px"}}>
-                    上一页
+                    <Trans>Last Page</Trans>
                 </Button>
                     
                 <Button onClick={paginateForward}>
-                    下一页
+                    <Trans>Next Page</Trans>
                 </Button>
                     
                 

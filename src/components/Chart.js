@@ -4,42 +4,44 @@ import { useSelector } from 'react-redux';
 import { selectDayChange, selectCard } from '../reducer'
 import { Row, Col } from "reactstrap";
 import { dataGen} from'../data/ChartData'
+import { useTranslation } from "react-i18next";
 
 
 export function Chart() {
-    const dayChange = useSelector(selectDayChange);
-    const selectedCard = useSelector(selectCard);
+  const { t } = useTranslation();
+  const dayChange = useSelector(selectDayChange);
+  const selectedCard = useSelector(selectCard);
 
-    const chartArr = [
-      <LineChart title="总确诊" data={ dataGen(dayChange.date, [{ data: dayChange.day_sum, label: "确诊人数", color: "#FFA500"}])} />,
-      <LineChart title="现存确诊" data={ dataGen(dayChange.date, [{ data: dayChange.day_active, label: "现存确诊", color: "#D8BFD8"}])} />,
-      <LineChart title="住院人数" data={ dataGen(dayChange.date, [{ data: dayChange.day_hospitalization, label: "住院人数", color: "#BC8F8F"}])} />,
-      <LineChart title="总检测" data={ dataGen(dayChange.date, [{ data: dayChange.day_test, label: "检测人数", color: "#FFA07A"}])} />,
-      <LineChart title="康复人数" data={ dataGen(dayChange.date, [{ data: dayChange.day_recovered, label: "康复人数", color: "#18ce0f"}])} />,
-      <LineChart title="死亡人数" data={ dataGen(dayChange.date, [{ data: dayChange.day_death, label: "死亡人数", color: "#778899"}])} />
-    ]
-    
-    return (
-        <Row>
-          <Col xs={12}>
-            {chartArr[selectedCard]}
-          </Col>
+  const chartArr = [
+    <LineChart title={t("Positive")} data={ dataGen(dayChange.date, [{ data: dayChange.day_sum, label: t("Positive"), color: "#FFA500"}])} />,
+    <LineChart title={t("Total Active")} data={ dataGen(dayChange.date, [{ data: dayChange.day_active, label: t("Total Active"), color: "#D8BFD8"}])} />,
+    <LineChart title={t("Active Hospitalization")} data={ dataGen(dayChange.date, [{ data: dayChange.day_hospitalization, label: t("Active Hospitalization"), color: "#BC8F8F"}])} />,
+    <LineChart title={t("Total Tested")} data={ dataGen(dayChange.date, [{ data: dayChange.day_test, label: "Total Tested", color: "#FFA07A"}])} />,
+    <LineChart title={t("recovered")} data={ dataGen(dayChange.date, [{ data: dayChange.day_recovered, label: "recovered", color: "#18ce0f"}])} />,
+    <LineChart title={t("death")} data={ dataGen(dayChange.date, [{ data: dayChange.day_death, label: "death", color: "#778899"}])} />
+  ]
+  
+  return (
+      <Row>
+        <Col xs={12}>
+          {chartArr[selectedCard]}
+        </Col>
 
-          <Col xs={12} md={4}>
-            {chartArr[selectedCard === 0 ? 3 : 0]}
-          </Col>
-          
-          <Col xs={12} md={4}>
-            <BarChart title="每日新增" data={ dataGen(dayChange.date, [
-              { data: dayChange.day_increase, label: "每日新增", color: "#2CA8FF"},
-              { data: dayChange.seven_avg, label: "七日平均", type: "line", color: "#f96332"}
-              ])}></BarChart>
-          </Col>
-          
-          <Col xs={12} md={4}>
-            {chartArr[selectedCard === 1 ? 4 : 1]}
-          </Col>
-          
-        </Row>
-    )
+        <Col xs={12} md={4}>
+          {chartArr[selectedCard === 0 ? 3 : 0]}
+        </Col>
+        
+        <Col xs={12} md={4}>
+          <BarChart title={t("New Positive")} data={ dataGen(dayChange.date, [
+            { data: dayChange.day_increase, label: t("New Positive"), color: "#2CA8FF"},
+            { data: dayChange.seven_avg, label: t("Seven Average"), type: "line", color: "#f96332"}
+            ])}></BarChart>
+        </Col>
+        
+        <Col xs={12} md={4}>
+          {chartArr[selectedCard === 1 ? 4 : 1]}
+        </Col>
+        
+      </Row>
+  )
 }

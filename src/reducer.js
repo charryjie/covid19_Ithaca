@@ -46,8 +46,6 @@ const slice = createSlice({
 
 
 export const { updateAllData, updateCard, updateIdx } = slice.actions;
-// export const selectNewDay = state => state.covid19.newDay;
-// export const selectTotal = state => state.covid19.total;
 export const selectDayChange = state => state.covid19.dayChange;
 export const selectAllData = state => state.covid19.allData;
 export const selectToday = state => state.covid19.today;

@@ -22,6 +22,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "assets/scss/now-ui-dashboard.scss?v1.4.0";
 import "assets/css/demo.css";
 
+import "./i18n";
 import App from "App";
 
 import updateReducer from './reducer';

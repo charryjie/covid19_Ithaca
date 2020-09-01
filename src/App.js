@@ -17,17 +17,23 @@
 */
 import React, { useEffect } from "react";
 // react plugin used to create charts
-
+import { useTranslation, Trans } from "react-i18next";
 import { PaginateTable } from './components/PaginateTable'
 import { DailyData } from './components/DailyData'
 import { Chart } from './components/Chart'
 // reactstrap components
-import { Row, Col } from "reactstrap";
+import { Row, Col, Button } from "reactstrap";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectAllData, selectToday, selectIdx, updateAllData } from './reducer';
 
 function App() {
+
+  const { i18n } = useTranslation();
+
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  };
 
   const dispatch = useDispatch();
   const allData = useSelector(selectAllData);
@@ -60,8 +66,12 @@ function App() {
   return (
     <div className="main-panel" style={{width: "100%", height: "unset", float: "unset", overflow: "visible"}}>
       <div className="panel-header" style={{height: "300px", background: "#778899"}}>
-        <h3 className="text-center font-weight-bold" style={{color: "white"}}>康奈尔大学疫情实时动态</h3>
-        <h6 className="text-center font-weight-bold" style={{color: "white"}}>更新于{today}</h6>
+        <h3 className="text-center font-weight-bold" style={{color: "white"}}><Trans>Cornell Covid-19 Tracking</Trans></h3>
+        <h6 className="text-center font-weight-bold" style={{color: "white"}}><Trans>updated on</Trans> {today}</h6>
+        <div className="text-center">
+          <Button style={{backgroundColor: "#2F4F4F", marginRight: "10px"}} onClick={() => changeLanguage("en")}>English</Button>
+          <Button style={{backgroundColor: "#2F4F4F"}} onClick={() => changeLanguage("zh")}>中文</Button>
+        </div>
       </div>
       <div className="content" style={{marginTop: "-80px"}}>
         {selectedIdx === -1 ? null : <DailyData />}
@@ -69,7 +79,7 @@ function App() {
         
         <Row>
           <Col xs={12}>                
-            <PaginateTable title="详细数据"></PaginateTable>
+            <PaginateTable title="Detailed Data"></PaginateTable>
           </Col>
           
         </Row>
