@@ -28,15 +28,14 @@ import {
 } from "reactstrap";
 
 import { useSelector, useDispatch } from 'react-redux';
-import { selectIdx, selectAllData, selectToday, updateByKey, updateAllData, changeColor } from './reducer';
+import { selectAllData, selectToday, selectIdx, updateAllData } from './reducer';
 
 function Dashboard() {
-  const card = React.createRef();
 
   const dispatch = useDispatch();
-  const currentIdx = useSelector(selectIdx);
   const allData = useSelector(selectAllData);
   const today = useSelector(selectToday);
+  const selectedIdx = useSelector(selectIdx);
 
   let getData = () => {
     if(allData.length > 0) return 
@@ -55,27 +54,10 @@ function Dashboard() {
     Http.send();
   }
 
-  let onScroll = () => {
-    if(card.current === null) return
-    let dis = card.current.offsetTop;
-    if(window.pageYOffset > dis ) {
-      if (currentIdx === -1) {
-        dispatch(changeColor("#D8BFD8"))
-        dispatch(updateByKey(allData.length-1))
-      }
-    } else {
-      dispatch(changeColor("white"))
-      dispatch(updateByKey(-1))
-    }
-  }
-
   useEffect(() => {
     getData();
   })
 
-  useEffect(() => {
-    window.onscroll = onScroll
-  })
   
 
   return (
@@ -84,8 +66,8 @@ function Dashboard() {
         <h3 className="text-center font-weight-bold" style={{color: "white"}}>康奈尔大学疫情实时动态</h3>
         <h6 className="text-center font-weight-bold" style={{color: "white"}}>{today}</h6>
       </div>
-      <div ref={card} className="content">
-        <DailyData />
+      <div className="content">
+        {selectedIdx === -1 ? null : <DailyData />}
         <Chart />
         
         <Row>

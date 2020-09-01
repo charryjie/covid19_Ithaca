@@ -9,6 +9,9 @@ import {
     CardTitle,
   } from "reactstrap";
 
+import { useDispatch } from 'react-redux';
+import { updateIdx } from '../reducer'
+
 export function hexToRGB(hex, alpha) {
     var r = parseInt(hex.slice(1, 3), 16),
         g = parseInt(hex.slice(3, 5), 16),
@@ -21,19 +24,23 @@ export function hexToRGB(hex, alpha) {
     }
 }
 
-export const chartConfigure = {
+
+const chartConfigure = (onClick) => ({
     maintainAspectRatio: false,
     legend: {
         display: true,
     },
     tooltips: {
         bodySpacing: 4,
-        mode: "nearest",
+        mode: "index",
         intersect: 0,
         position: "nearest",
         xPadding: 10,
         yPadding: 10,
         caretPadding: 10,
+        callbacks: {
+            afterFooter: onClick
+        }
     },
     responsive: 1,
     scales: {
@@ -68,11 +75,12 @@ export const chartConfigure = {
     },
     layout: {
         padding: { left: 0, right: 0, top: 5, bottom: 5 },
-    },
-};
+    }
+})
   
 
 export function LineChart(props) {
+    const dispatch = useDispatch();
     return (
       <Card className="card-chart">
         <CardHeader>
@@ -83,7 +91,11 @@ export function LineChart(props) {
           <div className="chart-area" style={{height: props.height !== undefined ? props.height : "250px"}}>
             <Line
               data={props.data}
-              options={props.options}
+              options={chartConfigure((tooltip) => {
+                dispatch(updateIdx(tooltip[0].index))
+                return ""
+            })}
+              
             />
           </div>
         </CardBody>
@@ -94,6 +106,7 @@ export function LineChart(props) {
 
   
 export function BarChart(props) {
+    const dispatch = useDispatch();
     return (
         <Card className="card-chart">
         <CardHeader>
@@ -104,7 +117,10 @@ export function BarChart(props) {
             <div className="chart-area" style={{height: props.height !== undefined ? props.height : "250px"}}>
             <Bar
                 data={props.data}
-                options={props.options}
+                options={chartConfigure((tooltip) => {
+                    dispatch(updateIdx(tooltip[0].index))
+                    return ""
+                })}
             />
             </div>
         </CardBody>

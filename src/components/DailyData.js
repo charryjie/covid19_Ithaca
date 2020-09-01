@@ -6,44 +6,46 @@ import {
     Col,
   } from "reactstrap";
 import { DataCard } from './DataCard'
-import { useSelector } from 'react-redux';
-import { selectNewDay, selectTotal, selectCardStyle } from '../reducer'
+import { useSelector, useDispatch } from 'react-redux';
+import { selectAllData, selectIdx, updateCard, selectCurrentChange } from '../reducer'
 
 export function DailyData() {
-    const newDay = useSelector(selectNewDay);
-    const total = useSelector(selectTotal);
-    const cardStyle = useSelector(selectCardStyle);
-
+    const dispatch = useDispatch();
+    const allData = useSelector(selectAllData);
+    const selectedIdx = useSelector(selectIdx);
+    const changes = useSelector(selectCurrentChange);
 
     return (
-        // <Row style={{ position: "", top: 0, zIndex: 999}} >
         <Row>
             <Col xs={12} md={6}>
-                <Card className="card-chart" style={cardStyle}>
+                <Card className="card-chart">
                     <CardBody>
                         <Row>
                             <Col className="text-center" xs={4} style={{borderRight: "1px solid grey"}}>
                                 <DataCard
                                     title={"总确诊"} 
-                                    data={total.positive}
-                                    secData={(newDay.new_positive >= 0 ? '+' : '') + newDay.new_positive}
-                                    color={newDay.new_positive <= 0 ? "green": "red"}
+                                    data={allData[selectedIdx].positive}
+                                    secData={(allData[selectedIdx].new_positive >= 0 ? '+' : '') + allData[selectedIdx].new_positive}
+                                    color={allData[selectedIdx].new_positive <= 0 ? "green": "red"}
+                                    onSelect={()=> dispatch(updateCard(0))}
                                 />
                             </Col>
                             <Col className="text-center" xs={4} style={{borderRight: "1px solid grey"}}>
                                 <DataCard
                                     title={"现存"} 
-                                    data={total.total_active}
-                                    secData={(newDay.new_totalactive >= 0 ? '+' : '') + newDay.new_totalactive}
-                                    color={newDay.new_totalactive <= 0 ? "green": "red"}
+                                    data={allData[selectedIdx].total_active}
+                                    secData={(changes.active >= 0 ? '+' : '') + changes.active}
+                                    color={changes.active <= 0 ? "green": "red"}
+                                    onSelect={()=> dispatch(updateCard(1))}
                                 />
                             </Col>
                             <Col className="text-center" xs={4} >
                                 <DataCard
                                     title={"住院"} 
-                                    data={total.hospitalization}
-                                    secData={(newDay.new_hospitalization >= 0 ? '+' : '') + newDay.new_hospitalization}
-                                    color={newDay.new_hospitalization <= 0 ? "green": "red"}
+                                    data={allData[selectedIdx].hospitalization}
+                                    secData={(changes.hospitalization >= 0 ? '+' : '') + changes.hospitalization}
+                                    color={changes.hospitalization <= 0 ? "green": "red"}
+                                    onSelect={()=> dispatch(updateCard(2))}
                                 />
                             </Col>
                         </Row>
@@ -51,29 +53,31 @@ export function DailyData() {
                 </Card>
             </Col>
             <Col xs={12} md={6}>
-                <Card className="card-chart" style={cardStyle}>
+                <Card className="card-chart">
                     <CardBody>
                         <Row>
                             <Col className="text-center" xs={4} style={{borderRight: "1px solid grey"}}>
-                            
-                            <DataCard
-                                title={"总检测"} 
-                                data={total.total_test}
-                                secData={"阳性率: " + total.positive_ratio + "%"}
-                            />
+                                <DataCard
+                                    title={"总检测"} 
+                                    data={allData[selectedIdx].total_test}
+                                    // secData={"阳性率: " + total.positive_ratio + "%"}
+                                    onSelect={()=> dispatch(updateCard(3))}
+                                />
                             </Col>
                             <Col className="text-center" xs={4} style={{borderRight: "1px solid grey"}}>
                                 <DataCard
                                     title={"康复"} 
-                                    data={total.recovered}
-                                    secData={"康复率: " + total.recover_ratio + "%"}
+                                    data={allData[selectedIdx].recovered}
+                                    // secData={"康复率: " + total.recover_ratio + "%"}
+                                    onSelect={()=> dispatch(updateCard(4))}
                                 />
                             </Col>
                             <Col className="text-center" xs={4}>
                                 <DataCard
                                     title={"死亡"} 
-                                    data={total.death}
-                                    secData={"死亡率: " + total.death_ratio + "%"}
+                                    data={allData[selectedIdx].death}
+                                    // secData={"死亡率: " + total.death_ratio + "%"}
+                                    onSelect={()=> dispatch(updateCard(5))}
                                 />
                             </Col>
                         </Row>
