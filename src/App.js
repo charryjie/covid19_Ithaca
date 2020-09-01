@@ -22,15 +22,12 @@ import { PaginateTable } from './components/PaginateTable'
 import { DailyData } from './components/DailyData'
 import { Chart } from './components/Chart'
 // reactstrap components
-import {
-  Row,
-  Col,
-} from "reactstrap";
+import { Row, Col } from "reactstrap";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectAllData, selectToday, selectIdx, updateAllData } from './reducer';
 
-function Dashboard() {
+function App() {
 
   const dispatch = useDispatch();
   const allData = useSelector(selectAllData);
@@ -61,12 +58,12 @@ function Dashboard() {
   
 
   return (
-    <>
+    <div className="main-panel" style={{width: "100%", height: "unset", float: "unset", overflow: "visible"}}>
       <div className="panel-header" style={{height: "300px", background: "#778899"}}>
         <h3 className="text-center font-weight-bold" style={{color: "white"}}>康奈尔大学疫情实时动态</h3>
-        <h6 className="text-center font-weight-bold" style={{color: "white"}}>{today}</h6>
+        <h6 className="text-center font-weight-bold" style={{color: "white"}}>更新于{today}</h6>
       </div>
-      <div className="content">
+      <div className="content" style={{marginTop: "-80px"}}>
         {selectedIdx === -1 ? null : <DailyData />}
         <Chart />
         
@@ -78,16 +75,8 @@ function Dashboard() {
         </Row>
         
       </div>
-    </>
-  );
-}
-
-function App() {
-  return (
-    <div className="main-panel" style={{width: "100%", height: "unset", float: "unset", overflow: "visible"}}>
-      <Dashboard></Dashboard>
     </div>
-  )
+  );
 }
 
 export default App;

@@ -4,19 +4,25 @@ import {
     CardBody,
     Row,
     Col,
+    Button
   } from "reactstrap";
 import { DataCard } from './DataCard'
 import { useSelector, useDispatch } from 'react-redux';
-import { selectAllData, selectIdx, updateCard, selectCurrentChange } from '../reducer'
+import { selectAllData, selectIdx, updateCard, selectCurrentChange, selectDayChange, updateIdx } from '../reducer'
 
 export function DailyData() {
     const dispatch = useDispatch();
     const allData = useSelector(selectAllData);
     const selectedIdx = useSelector(selectIdx);
     const changes = useSelector(selectCurrentChange);
+    const dayChange = useSelector(selectDayChange);
 
     return (
         <Row>
+            <Col xs={12}>
+                {selectedIdx === -1 ? null : <h6 className="font-weight-bold" style={{color: "white", paddingRight: "20px", display: "inline"}}>日期: {dayChange.date[selectedIdx]}</h6>}
+                <Button style={{backgroundColor: "#2F4F4F"}} onClick={()=>{dispatch(updateIdx(allData.length-1))}} >显示今日数据</Button>
+            </Col>
             <Col xs={12} md={6}>
                 <Card className="card-chart">
                     <CardBody>
@@ -60,7 +66,7 @@ export function DailyData() {
                                 <DataCard
                                     title={"总检测"} 
                                     data={allData[selectedIdx].total_test}
-                                    // secData={"阳性率: " + total.positive_ratio + "%"}
+                                    secData={"阳性率: " + changes.positive_ratio + "%"}
                                     onSelect={()=> dispatch(updateCard(3))}
                                 />
                             </Col>
@@ -68,7 +74,7 @@ export function DailyData() {
                                 <DataCard
                                     title={"康复"} 
                                     data={allData[selectedIdx].recovered}
-                                    // secData={"康复率: " + total.recover_ratio + "%"}
+                                    secData={"康复率: " + changes.recover_ratio + "%"}
                                     onSelect={()=> dispatch(updateCard(4))}
                                 />
                             </Col>
@@ -76,7 +82,7 @@ export function DailyData() {
                                 <DataCard
                                     title={"死亡"} 
                                     data={allData[selectedIdx].death}
-                                    // secData={"死亡率: " + total.death_ratio + "%"}
+                                    secData={"死亡率: " + changes.death_ratio + "%"}
                                     onSelect={()=> dispatch(updateCard(5))}
                                 />
                             </Col>
