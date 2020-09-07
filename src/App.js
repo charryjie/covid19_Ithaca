@@ -43,6 +43,7 @@ function App() {
   let getData = () => {
     if(allData.length > 0) return 
     const Http = new XMLHttpRequest();
+    // const url= 'https://qe9ojsk0m9.execute-api.ap-northeast-1.amazonaws.com/prod/dailydata';
     const url = 'https://covid19-ithaca.herokuapp.com/dailydata';
     // const url = 'http://localhost:4999/dailydata'
     Http.open("GET", url);

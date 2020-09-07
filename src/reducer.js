@@ -54,7 +54,8 @@ export const selectIdx = state => state.covid19.selectIdx;
 export const selectCurrentChange = state => {
   let data = state.covid19.allData
   let idx = state.covid19.selectIdx
-  
+  let date = data[idx].date.toString().replace('T','-').split('-')
+
   if (idx === 0) {
     return {
       active: data[idx].total_active,
@@ -62,6 +63,7 @@ export const selectCurrentChange = state => {
       positive_ratio: (data[idx].positive / data[idx].total_test * 100).toFixed(1),
       recover_ratio: (data[idx].recovered / data[idx].positive * 100).toFixed(1),
       death_ratio: (data[idx].death / data[idx].positive * 100).toFixed(1),
+      day: date[0] + '-' + date[1] + '-' + date[2]
     }
   }
   return {
@@ -70,6 +72,7 @@ export const selectCurrentChange = state => {
     positive_ratio: (data[idx].positive / data[idx].total_test * 100).toFixed(1),
     recover_ratio: (data[idx].recovered / data[idx].positive * 100).toFixed(1),
     death_ratio: (data[idx].death / data[idx].positive * 100).toFixed(1),
+    day: date[0] + '-' + date[1] + '-' + date[2]
   }
 }
 export default slice.reducer;

@@ -6,7 +6,6 @@ import { Row, Col } from "reactstrap";
 import { dataGen} from'../data/ChartData'
 import { useTranslation } from "react-i18next";
 
-
 export function Chart() {
   const { t } = useTranslation();
   const dayChange = useSelector(selectDayChange);
