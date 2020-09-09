@@ -23,8 +23,6 @@ export function DailyData() {
             <Col xs={12}>
                 {selectedIdx === -1 ? null : <h6 className="font-weight-bold" style={{color: "white", paddingRight: "20px", display: "inline"}}>{changes.day}</h6>}
                 <Button style={{backgroundColor: "#2F4F4F"}} onClick={()=>{dispatch(updateIdx(allData.length-1))}} ><Trans>show today</Trans></Button>
-                <h6 className="font-weight-bold" style={{color: "white", display: "inline", paddingLeft: "20px"}}><Trans>Click the data card to see its trending graph</Trans></h6>
-                <h6 className="font-weight-bold" style={{color: "white", display: "inline", paddingLeft: "20px"}}><Trans>Click the graph to see detailed data</Trans></h6>
             </Col>
             <Col xs={12} md={6}>
                 <Card className="card-chart">

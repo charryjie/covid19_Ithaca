@@ -34,8 +34,6 @@ i18n
           "Pending Result": "Pending Result",
           "Last Page": "Last Page",
           "Next Page": "Next Page",
-          "Click the graph to see detailed data": "Click the graph to see detailed data",
-          "Click the data card to see its trending graph": "Click the data card to see its trending graph"
         }
       },
       zh: {
@@ -65,8 +63,6 @@ i18n
           "Pending Result": "待定结果",
           "Last Page": "上一页",
           "Next Page": "下一页",
-          "Click the graph to see detailed data": "点击图片获取详细数据",
-          "Click the data card to see its trending graph": "点击卡片获取相应趋势图"
         }
       },
       
