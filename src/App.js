@@ -67,7 +67,8 @@ function App() {
   return (
     <div className="main-panel" style={{width: "100%", height: "unset", float: "unset", overflow: "visible"}}>
       <div className="panel-header" style={{height: "300px", background: "#778899"}}>
-        <h3 className="text-center font-weight-bold" style={{color: "white"}}><Trans>Cornell Covid-19 Tracking</Trans></h3>
+        <h3 className="text-center font-weight-bold" style={{color: "white", marginBottom: "6px"}}><Trans>Cornell Covid-19 Tracking</Trans></h3>
+        <h5 className="text-center font-weight-bold" style={{color: "white"}}>(<Trans>Tompkins</Trans>)</h5>
         <h6 className="text-center font-weight-bold" style={{color: "white"}}><Trans>updated on</Trans> {today}</h6>
         <div className="text-center">
           <Button style={{backgroundColor: "#2F4F4F", marginRight: "10px"}} onClick={() => changeLanguage("en")}>English</Button>
