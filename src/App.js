@@ -75,7 +75,7 @@ function App() {
           <Button style={{backgroundColor: "#2F4F4F"}} onClick={() => changeLanguage("zh")}>中文</Button>
         </div>
       </div>
-      <div className="content" style={{marginTop: "-80px"}}>
+      <div className="content" style={{marginTop: "-67px"}}>
         {selectedIdx === -1 ? null : <DailyData />}
         <Chart />
         
