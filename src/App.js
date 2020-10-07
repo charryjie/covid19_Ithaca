@@ -22,7 +22,7 @@ import { PaginateTable } from './components/PaginateTable'
 import { DailyData } from './components/DailyData'
 import { Chart } from './components/Chart'
 // reactstrap components
-import { Row, Col, Button } from "reactstrap";
+import { Row, Col, Button, CardFooter } from "reactstrap";
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectAllData, selectToday, selectIdx, updateAllData } from './reducer';
@@ -85,6 +85,10 @@ function App() {
           </Col>
           
         </Row>
+
+        <CardFooter className="text-center">
+          Developed and maintained by Jie Feng
+        </CardFooter>
         
       </div>
     </div>

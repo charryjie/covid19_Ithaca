@@ -34,7 +34,8 @@ i18n
           "Pending Result": "Pending Result",
           "Last Page": "Last Page",
           "Next Page": "Next Page",
-          "Tompkins": "Tompkins"
+          "Tompkins": "Tompkins",
+          "Developed and maintained by Jie Feng": "Developed and maintained by Jie Feng"
         }
       },
       zh: {
@@ -64,7 +65,8 @@ i18n
           "Pending Result": "待定结果",
           "Last Page": "上一页",
           "Next Page": "下一页",
-          "Tompkins": "汤普金斯郡"
+          "Tompkins": "汤普金斯郡",
+          "Developed and maintained by Jie Feng": "由Jie Feng开发并维护"
         }
       },
       
