@@ -87,7 +87,7 @@ function App() {
         </Row>
 
         <CardFooter className="text-center">
-          Developed and maintained by Jie Feng
+          <Trans>Developed and maintained by Jie Feng</Trans>
         </CardFooter>
         
       </div>
